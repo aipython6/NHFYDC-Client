@@ -16,3 +16,6 @@ export const ROLES_KEY = 'ROLES__KEY__';
 export const IS_LOCKSCREEN = 'IS_LOCKSCREEN';
 /** 标签页 */
 export const TABS_ROUTES = 'TABS_ROUTES';
+
+/** userCode */
+export const USER_CODE = 'USER_CODE';

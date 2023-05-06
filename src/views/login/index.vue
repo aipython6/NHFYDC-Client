@@ -61,8 +61,8 @@
     loading: false,
     captcha: '',
     formInline: {
-      username: '',
-      password: '',
+      username: 'rootadmin',
+      password: '123456',
       verifyCode: '',
       captchaId: '',
     },
@@ -74,7 +74,7 @@
   const userStore = useUserStore();
 
   const setCaptcha = async () => {
-    const { id, img } = await getImageCaptcha({ width: 100, height: 50 });
+    const { img, id } = await getImageCaptcha({});
     state.captcha = img;
     state.formInline.captchaId = id;
   };

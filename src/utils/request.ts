@@ -106,7 +106,7 @@ export const request = async <T = any>(
   options: RequestOptions = {},
 ): Promise<T> => {
   try {
-    const { successMsg, errorMsg, permCode, isMock, isGetDataDirectly = true } = options;
+    const { successMsg, errorMsg, permCode, isMock = false, isGetDataDirectly = false } = options;
     // 如果当前是需要鉴权的接口 并且没有权限的话 则终止请求发起
     if (permCode && !useUserStore().perms.includes(permCode)) {
       return $message.error('你没有访问该接口的权限，请联系管理员！');

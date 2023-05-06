@@ -3,7 +3,7 @@ import { useWsStore } from './ws';
 import type { RouteRecordRaw } from 'vue-router';
 import { store } from '@/store';
 import { login } from '@/api/login';
-import { ACCESS_TOKEN_KEY } from '@/enums/cacheEnum';
+import { ACCESS_TOKEN_KEY, USER_CODE } from '@/enums/cacheEnum';
 import { Storage } from '@/utils/Storage';
 import { logout, getInfo, permmenu } from '@/api/account';
 import { generatorDynamicRouter } from '@/router/generator-router';
@@ -12,6 +12,7 @@ import { resetRouter } from '@/router';
 interface UserState {
   token: string;
   name: string;
+  userCode: string;
   avatar: string;
   // like [ 'sys:user:add', 'sys:user:update' ]
   perms: string[];
@@ -24,6 +25,7 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     token: Storage.get(ACCESS_TOKEN_KEY, null),
     name: 'amdin',
+    userCode: Storage.get(USER_CODE, null),
     avatar: '',
     perms: [],
     menus: [],

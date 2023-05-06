@@ -41,6 +41,9 @@ export const useUserStore = defineStore({
     getName(): string {
       return this.name;
     },
+    getUserCode(): string {
+      return this.userCode;
+    },
     getPerms(): string[] {
       return this.perms;
     },
@@ -48,7 +51,7 @@ export const useUserStore = defineStore({
   actions: {
     /** 清空token及用户信息 */
     resetToken() {
-      this.avatar = this.token = this.name = '';
+      this.avatar = this.token = this.name = this.userCode = '';
       this.perms = [];
       this.menus = [];
       this.userInfo = {};

@@ -10,6 +10,7 @@ declare namespace API {
   /** 登录成功结果 */
   type LoginResult = {
     token: string;
+    userCode: string;
   };
 
   /** 获取验证码参数 */

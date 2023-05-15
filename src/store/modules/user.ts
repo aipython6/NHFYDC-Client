@@ -63,11 +63,16 @@ export const useUserStore = defineStore({
       const ex = 7 * 24 * 60 * 60 * 1000;
       Storage.set(ACCESS_TOKEN_KEY, this.token, ex);
     },
+    setUserCode(userCode: string) {
+      this.userCode = userCode;
+      Storage.set(USER_CODE, this.userCode);
+    },
     /** 登录 */
     async login(params: API.LoginParams) {
       try {
         const { data } = await login(params);
         this.setToken(data.token);
+        this.setUserCode(data.userCode);
         return this.afterLogin();
       } catch (error) {
         return Promise.reject(error);

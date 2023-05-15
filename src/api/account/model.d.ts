@@ -34,10 +34,11 @@ declare namespace API {
     id: number;
     departmentId: number;
     name: string;
-    username: string;
+    // username: string;
+    usercode: string;
     password: string;
     psalt: string;
-    nickName: string;
+    // nickName: string;
     headImg: string;
     loginIp: string;
     email: string;

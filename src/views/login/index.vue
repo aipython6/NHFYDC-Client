@@ -61,7 +61,7 @@
     loading: false,
     captcha: '',
     formInline: {
-      username: 'rootadmin',
+      username: '10529',
       password: '123456',
       verifyCode: '',
       captchaId: '',
@@ -90,7 +90,7 @@
     }
     message.loading('登录中...', 0);
     state.loading = true;
-    console.log(state.formInline);
+    // console.log(state.formInline);
     // params.password = md5(password)
 
     const [err] = await to(userStore.login(state.formInline));

@@ -72,7 +72,7 @@ export const useUserStore = defineStore({
       try {
         const { data } = await login(params);
         this.setToken(data.token);
-        this.setUserCode(data.userCode);
+        this.setUserCode(data.user_code);
         return this.afterLogin();
       } catch (error) {
         return Promise.reject(error);
@@ -82,12 +82,16 @@ export const useUserStore = defineStore({
     async afterLogin() {
       try {
         const wsStore = useWsStore();
-        const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
+        // const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
+        const userInfo = await getInfo();
+        const { perms, menus } = await permmenu();
         this.perms = perms;
         this.name = userInfo.name;
         this.avatar = userInfo.headImg;
         this.userInfo = userInfo;
         // 生成路由
+        // console.log(userInfo);
+        console.log(menus);
         const generatorResult = await generatorDynamicRouter(menus);
         this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu);
         !wsStore.client && wsStore.initSocket();

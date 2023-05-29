@@ -18,17 +18,27 @@ export function updatePassword(data: any) {
 }
 
 export function getInfo() {
-  return request<API.AdminUserInfo>({
-    url: 'account/info',
-    method: 'get',
-  });
+  return request<API.AdminUserInfo>(
+    {
+      url: 'account/info',
+      method: 'get',
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
 }
 
 export function permmenu() {
-  return request<API.PermMenu>({
-    url: 'account/permmenu',
-    method: 'get',
-  });
+  return request<API.PermMenu>(
+    {
+      url: 'account/permmenu',
+      method: 'get',
+    },
+    {
+      isGetDataDirectly: false,
+    },
+  );
 }
 
 export function logout() {

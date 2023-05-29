@@ -35,7 +35,7 @@ service.interceptors.request.use(
   (config) => {
     const token = Storage.get(ACCESS_TOKEN_KEY);
     const userCode = Storage.get(USER_CODE);
-    if (token && config.headers) {
+    if (token && config.headers && userCode) {
       // 请求头token信息，请根据实际情况进行修改
       config.headers['Authorization'] = token;
       config.headers['user_code'] = userCode;
@@ -108,17 +108,17 @@ export const request = async <T = any>(
   options: RequestOptions = {},
 ): Promise<T> => {
   try {
-    const { successMsg, errorMsg, permCode, isMock = false, isGetDataDirectly = false } = options;
+    const { successMsg, errorMsg, permCode, isMock = false, isGetDataDirectly } = options;
     // 如果当前是需要鉴权的接口 并且没有权限的话 则终止请求发起
     if (permCode && !useUserStore().perms.includes(permCode)) {
       return $message.error('你没有访问该接口的权限，请联系管理员！');
     }
     const fullUrl = `${(isMock ? baseMockUrl : baseApiUrl) + config.url}`;
     config.url = uniqueSlash(fullUrl);
-
     const res = await service.request(config);
     successMsg && $message.success(successMsg);
     errorMsg && $message.error(errorMsg);
+    // console.log(res);
     return isGetDataDirectly ? res.data : res;
   } catch (error: any) {
     return Promise.reject(error);

@@ -22,9 +22,14 @@ export function login(data: API.LoginParams) {
  * @description 获取验证码
  */
 export function getImageCaptcha(params?: API.CaptchaParams) {
-  return request<API.CaptchaResult>({
-    url: 'login/getImageCode',
-    method: 'get',
-    params,
-  });
+  return request<API.CaptchaResult>(
+    {
+      url: 'login/getImageCode',
+      method: 'get',
+      params,
+    },
+    {
+      isGetDataDirectly: false,
+    },
+  );
 }

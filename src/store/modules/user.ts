@@ -85,13 +85,12 @@ export const useUserStore = defineStore({
         // const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
         const userInfo = await getInfo();
         const { perms, menus } = await permmenu();
+        console.log(userInfo.headImg);
         this.perms = perms;
         this.name = userInfo.name;
         this.avatar = userInfo.headImg;
         this.userInfo = userInfo;
         // 生成路由
-        // console.log(userInfo);
-        console.log(menus);
         const generatorResult = await generatorDynamicRouter(menus);
         this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu);
         !wsStore.client && wsStore.initSocket();

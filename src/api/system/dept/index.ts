@@ -7,10 +7,15 @@ import Api from '@/core/permission/modules/sys/dept';
  * @returns
  */
 export function getDeptList() {
-  return request<API.SysDeptListResult[]>({
-    url: Api.list,
-    method: 'get',
-  });
+  return request<API.SysDeptListResult[]>(
+    {
+      url: Api.list,
+      method: 'get',
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
 }
 
 /**

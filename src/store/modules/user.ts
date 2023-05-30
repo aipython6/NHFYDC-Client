@@ -85,7 +85,6 @@ export const useUserStore = defineStore({
         // const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
         const userInfo = await getInfo();
         const { perms, menus } = await permmenu();
-        console.log(userInfo.headImg);
         this.perms = perms;
         this.name = userInfo.name;
         this.avatar = userInfo.headImg;

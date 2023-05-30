@@ -335,6 +335,7 @@
       departmentIds: state.departmentIds.length ? state.departmentIds : undefined,
     });
     rowSelection.value.selectedRowKeys = [];
+    // console.log(data);
     return data;
   };
 

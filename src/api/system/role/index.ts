@@ -11,11 +11,16 @@ export function getRoleInfo(query: { roleId: number }) {
 }
 
 export function getRoleList(data?: API.PageParams) {
-  return request<API.RoleListResult>({
-    url: Api.list,
-    method: 'get',
-    data,
-  });
+  return request<API.RoleListResult>(
+    {
+      url: Api.list,
+      method: 'get',
+      data,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
 }
 
 export function getRoleListByPage(query: API.PageParams) {

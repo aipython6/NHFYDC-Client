@@ -28,11 +28,16 @@ export function createUser(data: API.CreateUserParams) {
 }
 
 export function getUserInfo(query: { userId: number }) {
-  return request<API.AdminUserInfo>({
-    url: Api.info,
-    method: 'get',
-    params: query,
-  });
+  return request<API.AdminUserInfo>(
+    {
+      url: Api.info,
+      method: 'get',
+      params: query,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
 }
 
 export function updateUser(data: API.UpdateAdminInfoParams) {

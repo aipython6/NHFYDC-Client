@@ -49,6 +49,7 @@ export const userSchemas: FormSchema<API.CreateUserParams>[] = [
       mode: 'multiple',
       request: async () => {
         const data = await getRoleList();
+        console.log(data);
         return data.map((n) => ({ label: n.name, value: n.id }));
       },
     },

@@ -2,10 +2,15 @@ import { request } from '@/utils/request';
 import Api from '@/core/permission/modules/sys/menu';
 
 export function getMenuList() {
-  return request<API.MenuListResult>({
-    url: Api.list,
-    method: 'get',
-  });
+  return request<API.MenuListResult>(
+    {
+      url: Api.list,
+      method: 'get',
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
 }
 
 export function getMenuInfo(query: { menuId: number }) {

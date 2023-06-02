@@ -24,11 +24,14 @@ export function getRoleList(data?: API.PageParams) {
 }
 
 export function getRoleListByPage(query: API.PageParams) {
-  return request({
-    url: Api.page,
-    method: 'get',
-    params: query,
-  });
+  return request(
+    {
+      url: Api.page,
+      method: 'get',
+      params: query,
+    },
+    { isGetDataDirectly: true },
+  );
 }
 
 export function createRole(data: API.CreateRoleParams) {

@@ -154,7 +154,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
         '/ws-api': {
           target: 'wss://nest-api.buqiyuan.site',
-          // target: 'http://localhost:3010',
+          // target: 'ws://localhost:3020',
           changeOrigin: true, //是否允许跨域
           ws: true,
         },

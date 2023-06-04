@@ -3,11 +3,14 @@ import { request } from '@/utils/request';
 import Api from '@/core/permission/modules/sys/role';
 
 export function getRoleInfo(query: { roleId: number }) {
-  return request<API.RoleInfoResult>({
-    url: Api.info,
-    method: 'get',
-    params: query,
-  });
+  return request<API.RoleInfoResult>(
+    {
+      url: Api.info,
+      method: 'get',
+      params: query,
+    },
+    { isGetDataDirectly: true },
+  );
 }
 
 export function getRoleList(data?: API.PageParams) {

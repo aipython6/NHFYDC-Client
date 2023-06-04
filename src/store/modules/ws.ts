@@ -56,7 +56,7 @@ export const useWsStore = defineStore({
       ws.subscribe(EVENT_UPDATE_MENU, async () => {
         const userStore = useUserStore();
         const tabsViewStore = useTabsViewStore();
-        console.log('EVENT_UPDATE_MENU', EVENT_UPDATE_MENU);
+        // console.log('EVENT_UPDATE_MENU', EVENT_UPDATE_MENU);
 
         await userStore.afterLogin();
         const currentRoute = router.currentRoute.value!;

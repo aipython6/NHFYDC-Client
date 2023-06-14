@@ -18,10 +18,12 @@ import {
   Rate,
   Divider,
   Upload,
+  Textarea,
 } from 'ant-design-vue';
 
 const componentMap = {
   Input,
+  Textarea,
   InputGroup: Input.Group,
   InputPassword: Input.Password,
   InputSearch: Input.Search,

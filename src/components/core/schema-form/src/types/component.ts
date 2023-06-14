@@ -16,6 +16,7 @@ import type {
   UploadProps,
   DatePickerProps,
   CheckboxProps,
+  TextAreaProps,
 } from 'ant-design-vue';
 import type { RenderCallbackParams } from './form';
 
@@ -53,6 +54,7 @@ export type ComponentProps = (
   | DatePickerProps
   | CheckboxProps
   | SliderProps
+  | TextAreaProps
 ) & {
   /** 组件异步请求数据 */
   request?: RequestConfig;

@@ -13,4 +13,5 @@ export default {
   'views/system/schedule/log': () => import('@/views/system/schedule/log/index.vue'),
   'views/system/param-config/config-list': () =>
     import('@/views/system/param-config/config-list.vue'),
+  'views/system/data-manager': () => import('@/views/system/data-manager/index.vue'),
 } as const;

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <DynamicTable header-title="数据项管理" :data-request="loadTableData" :columns="columns">
+    <DynamicTable
+      header-title="数据项管理"
+      show-index
+      :data-request="loadTableData"
+      :columns="columns"
+    >
       <template #toolbar>
         <a-button type="primary" :disabled="!$auth('sys.data.add')" @click="openDataModal({})">
           新增
@@ -21,11 +26,12 @@
     name: 'DataManager',
   });
 
-  const [DynamicTable, dynamicTableInstance] = useTable({ formProps: { autoSubmitOnEnter: true } });
+  const [DynamicTable, dynamicTableInstance] = useTable({
+    formProps: { autoSubmitOnEnter: true },
+  });
   const [showModal] = useFormModal();
   const loadTableData = async (params: LoadDataParams) => {
-    const data = await getDataList();
-    // console.log(data);
+    const data = await getDataList(params);
     return data;
   };
 
@@ -53,7 +59,7 @@
 
     formRef?.updateSchema([
       {
-        field: 'dataId',
+        field: 'id',
       },
     ]);
 
@@ -66,15 +72,15 @@
   /**
    * @description 表格删除行
    */
-  const delRowConfirm = async (dataId: number) => {
-    await deleteData({ dataId: dataId }).finally(dynamicTableInstance?.reload);
+  const delRowConfirm = async (id: number) => {
+    await deleteData({ id: id }).finally(dynamicTableInstance?.reload);
   };
 
   const columns: TableColumnItem[] = [
     ...baseColumns,
     {
       title: '操作',
-      width: 230,
+      width: 200,
       dataIndex: 'ACTION',
       align: 'center',
       fixed: 'right',

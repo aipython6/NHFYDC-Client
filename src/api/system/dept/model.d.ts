@@ -65,4 +65,11 @@ declare namespace API {
       orderNum: number;
     };
   };
+
+  type deptNameResult = {
+    id: number;
+    name: string;
+  };
+
+  type deptNameList = deptNameResult[];
 }

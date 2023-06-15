@@ -99,3 +99,21 @@ export function transferDept(data: API.TransferDeptParams) {
     data,
   });
 }
+
+/**
+ * @description 根据名称模糊查询部门
+ * @param query
+ * @returns
+ */
+export function getDeptByName(query: { deptName: string }) {
+  return request<API.deptNameList>(
+    {
+      url: Api.deptname,
+      method: 'get',
+      params: query,
+    },
+    // {
+    //   isGetDataDirectly: true,
+    // },
+  );
+}

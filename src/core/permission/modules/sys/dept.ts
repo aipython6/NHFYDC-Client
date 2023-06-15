@@ -9,6 +9,7 @@ export const sysDept = {
   add: 'sys/dept/add',
   info: 'sys/dept/info',
   transfer: 'sys/dept/transfer',
+  deptname: 'sys/dept/deptname',
 } as const;
 
 export const values = Object.values(sysDept);

@@ -1,4 +1,5 @@
 import type { FormSchema } from '@/components/core/schema-form/';
+import { getDeptByName } from '@/api/system/dept';
 
 export const dataSchemas: FormSchema<API.addDataParams>[] = [
   {
@@ -24,6 +25,17 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     component: 'Select',
     label: '所属科室',
     rules: [{ required: true, type: 'string', message: '请选择科室' }],
+    componentProps: {
+      mode: 'multiple',
+      onSearch: async (dept: string) => {
+        const data = await getDeptByName({ deptName: dept });
+        if (data.length > 0) {
+          return data.map((n) => ({ label: n.name, value: n.id }));
+        } else {
+          return [];
+        }
+      },
+    },
   },
   {
     field: 'dataSource',

@@ -1,11 +1,12 @@
 import { request } from '@/utils/request';
 import Api from '@/core/permission/modules/sys/data';
 
-export function getDataList() {
+export function getDataList(data: API.PageParams) {
   return request<API.dataListResultItem>(
     {
       url: Api.list,
-      method: 'get',
+      method: 'post',
+      data,
     },
     {
       isGetDataDirectly: true,
@@ -39,7 +40,7 @@ export function updateData(data: API.updateDataParams) {
   );
 }
 
-export function deleteData(data: { dataId: number }) {
+export function deleteData(data: { id: number }) {
   return request(
     {
       url: Api.delete,

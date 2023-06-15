@@ -1,5 +1,6 @@
 import type { FormSchema } from '@/components/core/schema-form/';
 import { getDeptByName } from '@/api/system/dept';
+import { getTypeList } from '@/api/data-manager';
 
 export const dataSchemas: FormSchema<API.addDataParams>[] = [
   {
@@ -19,6 +20,13 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     component: 'Select',
     label: '所属小类',
     rules: [{ required: true, type: 'string', message: '请选择小类' }],
+    componentProps: {
+      mode: 'multiple',
+      request: async () => {
+        const data = await getTypeList({ type: 2 });
+        return data.map((n) => ({ label: n.name, value: n.id }));
+      },
+    },
   },
   {
     field: 'useDeptId',
@@ -30,6 +38,8 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
       onSearch: async (dept: string) => {
         const data = await getDeptByName({ deptName: dept });
         if (data.length > 0) {
+          const temp = data.map((n) => ({ label: n.name, value: n.id }));
+          console.log(temp);
           return data.map((n) => ({ label: n.name, value: n.id }));
         } else {
           return [];

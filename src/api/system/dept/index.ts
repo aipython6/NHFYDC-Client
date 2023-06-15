@@ -112,8 +112,8 @@ export function getDeptByName(query: { deptName: string }) {
       method: 'get',
       params: query,
     },
-    // {
-    //   isGetDataDirectly: true,
-    // },
+    {
+      isGetDataDirectly: true,
+    },
   );
 }

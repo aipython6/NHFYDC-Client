@@ -52,3 +52,16 @@ export function deleteData(data: { id: number }) {
     },
   );
 }
+
+export function getTypeList(data: { type: number }) {
+  return request(
+    {
+      url: Api.getType,
+      method: 'get',
+      data,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
+}

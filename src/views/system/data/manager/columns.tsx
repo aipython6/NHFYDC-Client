@@ -1,5 +1,5 @@
+import { Tag } from 'ant-design-vue';
 import type { TableColumn } from '@/components/core/dynamic-table';
-
 export type TableListItem = API.dataListResultItem;
 export type TableColumnItem = TableColumn<TableListItem>;
 
@@ -38,9 +38,48 @@ export const baseColumns: TableColumnItem[] = [
   },
   {
     title: 'sql',
-    width: 280,
+    width: 200,
     align: 'center',
     dataIndex: 'sql',
     ellipsis: true,
+  },
+  {
+    title: '备注',
+    width: 100,
+    align: 'center',
+    dataIndex: 'remark',
+    ellipsis: true,
+  },
+  // {
+  //   title: '数据库',
+  //   width: 100,
+  //   align: 'center',
+  //   dataIndex: 'database',
+  //   ellipsis: true,
+  // },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    width: 80,
+    hideInSearch: true,
+    formItemProps: {
+      component: 'Select',
+      componentProps: {
+        options: [
+          {
+            label: '启用',
+            value: 1,
+          },
+          {
+            label: '禁用',
+            value: 0,
+          },
+        ],
+      },
+    },
+    customRender: ({ record }) => {
+      const isEnable = record.status === 1;
+      return <Tag color={isEnable ? 'success' : 'red'}>{isEnable ? '启用' : '禁用'}</Tag>;
+    },
   },
 ];

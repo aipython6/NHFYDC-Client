@@ -1,4 +1,13 @@
 declare namespace API {
+  type UserAssignData = {
+    id: number;
+    name: string;
+    status: number;
+    username: string;
+    departmentName: string;
+    roleNames: string[];
+  };
+
   type UserListPageResultItem = {
     createdAt: string;
     departmentId: number;

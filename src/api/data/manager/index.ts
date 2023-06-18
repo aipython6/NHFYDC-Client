@@ -1,10 +1,23 @@
 import { request } from '@/utils/request';
 import Api from '@/core/permission/modules/sys/data';
 
+export function getDataInfo(data: { dataId: number }) {
+  return request<API.dataInfo>(
+    {
+      url: Api.managerDataInfo,
+      method: 'get',
+      params: data,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
+}
+
 export function getDataList(data: API.PageParams) {
   return request<API.dataListResultItem>(
     {
-      url: Api.list,
+      url: Api.managerList,
       method: 'post',
       data,
     },
@@ -17,7 +30,7 @@ export function getDataList(data: API.PageParams) {
 export function createData(data: API.addDataParams) {
   return request(
     {
-      url: Api.add,
+      url: Api.managerAdd,
       method: 'post',
       data,
     },
@@ -30,7 +43,7 @@ export function createData(data: API.addDataParams) {
 export function updateData(data: API.updateDataParams) {
   return request(
     {
-      url: Api.update,
+      url: Api.managerUpdate,
       method: 'post',
       data,
     },
@@ -40,10 +53,10 @@ export function updateData(data: API.updateDataParams) {
   );
 }
 
-export function deleteData(data: { id: number }) {
+export function deleteDatas(data: { ids: number[] }) {
   return request(
     {
-      url: Api.delete,
+      url: Api.managerDelete,
       method: 'post',
       data,
     },
@@ -54,11 +67,11 @@ export function deleteData(data: { id: number }) {
 }
 
 export function getTypeList(data: { type: number }) {
-  return request(
+  return request<API.dataTypeList>(
     {
-      url: Api.getType,
+      url: Api.managerGetType,
       method: 'get',
-      data,
+      params: data,
     },
     {
       isGetDataDirectly: true,

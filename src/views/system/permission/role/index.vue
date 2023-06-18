@@ -88,6 +88,8 @@
     const menuTree = formatMenu2Tree(menuData);
     const deptTree = formatDept2Tree(deptData);
 
+    // console.log(menuTree);
+
     formRef?.updateSchema([
       {
         field: 'menus',

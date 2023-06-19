@@ -1,11 +1,10 @@
 import { request } from '@/utils/request';
 import Api from '@/core/permission/modules/query/home';
 
-// 获取某个userid的所有指标项
-export function userIndexList(data: { userCode: string }) {
-  return request<API.indexListItem>(
+export function getDatabyDataid(data: { dataId: number }) {
+  return request(
     {
-      url: Api.list,
+      url: Api.getDataByDataid,
       method: 'get',
       params: data,
     },

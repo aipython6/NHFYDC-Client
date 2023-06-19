@@ -1,7 +1,7 @@
 import dashboard from './dashboard';
-import demos from './demos';
 // import externaLink from './externa-link';
 import account from './account';
+import queryData from './queryData';
 
 // export default [...dashboard, ...demos, ...externaLink, ...account];
-export default [...dashboard, ...demos, ...account];
+export default [...dashboard, ...account, ...queryData];

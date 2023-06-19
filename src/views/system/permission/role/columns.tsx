@@ -20,7 +20,7 @@ export const baseColumns: TableColumnItem[] = [
   },
   {
     title: '标识',
-    width: 80,
+    width: 100,
     align: 'center',
     dataIndex: 'label',
   },

@@ -1,9 +1,10 @@
 <template>
   <div class="login-box">
-    <div class="login-logo">
+    <div class="login-logo flex flex-col">
       <!-- <svg-icon name="logo" :size="45" /> -->
-      <img src="~@/assets/images/logo.png" width="45" />
-      <h1 class="mb-0 ml-2 text-3xl font-bold">Antd Admin</h1>
+      <!-- <img src="~@/assets/images/logo.png" width="45" /> -->
+      <img src="~@/assets/images/main-bg.png" width="500" height="85" />
+      <h1 class="mb-0 ml-2 text-3xl font-bold">数据综合查询平台</h1>
     </div>
     <a-form layout="horizontal" :model="state.formInline" @submit.prevent="handleSubmit">
       <a-form-item>
@@ -115,7 +116,7 @@
     display: flex;
     width: 100vw;
     height: 100vh;
-    padding-top: 240px;
+    padding-top: 140px;
     background: url('@/assets/login.svg');
     background-size: 100%;
     flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <div class="logo cursor-pointer" @click="home">
-    <img src="~@/assets/images/cx.png" alt="" width="50" height="100" />
+    <img src="~@/assets/images/cx.png" alt="" width="38" height="100" />
     <h3 v-show="!collapsed" class="title">数据查询平台</h3>
   </div>
 </template>

@@ -1,10 +1,10 @@
 {
-  "name": "vite-vue3-admin",
+  "name": "vue3-admin",
   "version": "1.1.0",
   "author": {
-    "name": "buqiyuan",
-    "email": "1743369777@qq.com",
-    "url": "https://github.com/buqiyuan"
+    "name": "dingan",
+    "email": "nongdingan@126.com",
+    "url": "https://github.com/aipython6/NHFYDC-Client"
   },
   "scripts": {
     "bootstrap": "pnpm install",

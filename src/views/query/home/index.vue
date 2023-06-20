@@ -6,6 +6,7 @@
         v-model:value="indexName"
         style="margin-bottom: 8px; width: 300px"
         placeholder="搜索指标名称"
+        @change="search(indexName)"
       >
       </a-input-search>
     </div>
@@ -19,6 +20,17 @@
           </a-list-item>
         </template>
       </a-list>
+    </div>
+    <div>
+      <div class="pt-4 flex order-1">
+        <a-pagination
+          show-quick-jumper
+          v-model:current="current"
+          :total="total"
+          @change="onChange"
+          @showSizeChange="showSizeChange"
+        />
+      </div>
     </div>
   </div>
   <div v-else>
@@ -38,20 +50,45 @@
 
   const userStore = useUserStore();
   const indexName = ref<string>('');
+  const current = ref<number>(1);
+  const limit = ref<number>(10);
+  const total = ref<number>(0);
 
   // 数据项列表
   const indexLists = ref<API.indexListItem>([]);
   const getIndexList = async () => {
-    const data = await userIndexList({ userCode: userStore.getUserCode });
-    // const data = await userIndexList({ userCode: '10531' });
+    const data = await userIndexList({
+      userCode: userStore.getUserCode,
+      limit: limit.value,
+      page: current.value,
+    });
     indexLists.value = data;
+    total.value = data.length;
   };
   const backHome = () => {
     router.push({ path: '/dashboard/welcome' });
   };
+  // 根据关键词搜索指标
+  const search = async (searchVal: string) => {
+    if (searchVal) {
+      const fullList = indexLists.value;
+      indexLists.value = fullList.filter((e) => e.dataName.indexOf(searchVal) > -1);
+    } else {
+      getIndexList();
+    }
+  };
+  //每页显示的条数触发
+  const showSizeChange = async (current_: number, pageSize: number) => {
+    limit.value = pageSize;
+    current.value = current_;
+    await getIndexList();
+  };
+  // 选择上下页触发
+  const onChange = async (pageNumber: number) => {
+    current.value = pageNumber;
+    await getIndexList();
+  };
   onMounted(() => {
     getIndexList();
-    // console.log(route);
-    // console.log(router);
   });
 </script>

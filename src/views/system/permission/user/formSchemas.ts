@@ -18,6 +18,12 @@ export const deptSchemas: FormSchema<API.CreateDeptParams>[] = [
     rules: [{ required: true, type: 'number' }],
   },
   {
+    field: 'HISdeptID',
+    component: 'Input',
+    label: 'HISdeptID',
+    rules: [{ required: true, type: 'string' }],
+  },
+  {
     field: 'orderNum',
     component: 'InputNumber',
     label: '排序号',

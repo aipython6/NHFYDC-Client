@@ -60,7 +60,7 @@ export const useUserStore = defineStore({
     /** 登录成功保存token */
     setToken(token: string) {
       this.token = token ?? '';
-      const ex = 7 * 24 * 60 * 60 * 1000;
+      const ex = 1 * 24 * 60 * 60 * 1000;
       Storage.set(ACCESS_TOKEN_KEY, this.token, ex);
     },
     setUserCode(userCode: string) {

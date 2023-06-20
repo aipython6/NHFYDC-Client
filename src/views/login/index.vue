@@ -8,7 +8,7 @@
     </div>
     <a-form layout="horizontal" :model="state.formInline" @submit.prevent="handleSubmit">
       <a-form-item>
-        <a-input v-model:value="state.formInline.username" size="large" placeholder="rootadmin">
+        <a-input v-model:value="state.formInline.username" size="large" placeholder="请输入用户名">
           <template #prefix><user-outlined type="user" /></template>
         </a-input>
       </a-form-item>
@@ -17,7 +17,7 @@
           v-model:value="state.formInline.password"
           size="large"
           type="password"
-          placeholder="123456"
+          placeholder="请输入密码"
           autocomplete="new-password"
         >
           <template #prefix><lock-outlined type="user" /></template>
@@ -84,10 +84,10 @@
   const handleSubmit = async () => {
     const { username, password, verifyCode } = state.formInline;
     if (username.trim() == '' || password.trim() == '') {
-      return message.warning('用户名或密码不能为空！');
+      return message.warning('用户名或密码不能为空!');
     }
     if (!verifyCode) {
-      return message.warning('请输入验证码！');
+      return message.warning('请输入验证码!');
     }
     message.loading('登录中...', 0);
     state.loading = true;
@@ -103,7 +103,7 @@
       });
       setCaptcha();
     } else {
-      message.success('登录成功！');
+      message.success('登录成功!');
       setTimeout(() => router.replace((route.query.redirect as string) ?? '/'));
     }
     state.loading = false;

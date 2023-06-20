@@ -37,6 +37,7 @@ declare namespace API {
   type CreateDeptParams = {
     name: string;
     parentId: number;
+    HISdeptID: string;
     orderNum: number;
   };
 

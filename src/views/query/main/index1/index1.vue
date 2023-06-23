@@ -4,7 +4,7 @@
       <CommonPage :title="title" @datePickChange="datePickChange" />
     </div>
     <div class="pt-8">
-      <a-button type="success" @click="back">返回</a-button>
+      <a-button type="info" @click="back">返回</a-button>
     </div>
   </div>
 </template>

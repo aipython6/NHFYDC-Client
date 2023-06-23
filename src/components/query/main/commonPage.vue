@@ -9,28 +9,53 @@
         <a-select
           v-model:value="value"
           show-search
-          placeholder="请输入科室查询"
-          style="width: 400px"
+          placeholder="请输入科室名称"
+          style="width: 100%"
           :default-active-first-option="false"
           :allow-clear="true"
           :show-arrow="true"
           :filter-option="false"
           :not-found-content="null"
-          :disabled="true"
+          :disabled="showDept"
           :options="data"
           @search="handleSearch"
           @change="handleChange"
         ></a-select>
-        <a-radio-group v-model:value="checkNum" :options="plainOptions" class="col-span-2" />
-        <a-button style="width: 90px" type="primary">搜索</a-button>
+        <a-input placeholder="请输入诊断名称" :disabled="showDiagises"></a-input>
+        <a-radio-group
+          :disabled="showPeriod"
+          style="width: 300px"
+          v-model:value="checkNum"
+          :options="plainOptions"
+        />
+      </div>
+      <div class="grid grid-cols-5 gap-4 pt-4">
+        <a-input placeholder="请输入手术名称" :disabled="showOpera"></a-input>
+        <a-input placeholder="请输入医生姓名" :disabled="showDoctor"></a-input>
+        <a-input placeholder="请输入医嘱内容" :disabled="showOrder"></a-input>
+        <div>
+          <a-button style="width: 90px" type="primary">查询</a-button>
+          <span class="pl-1 text-red-500 text-sm">(所有条件均为精确查询)</span>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <a-button type="success" @click="defaultHeader"
+          >导出
+          <template #icon>
+            <DownloadOutlined />
+          </template>
+        </a-button>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { string } from 'vue-types';
+  import { string, bool } from 'vue-types';
   import type { Dayjs } from 'dayjs';
+  import { DownloadOutlined } from '@ant-design/icons-vue';
+  import { jsonToSheetXlsx } from '@/components/basic/excel';
   type RangeVal = [Dayjs, Dayjs];
   const pickDate = ref<RangeVal>();
   const props = defineProps({
@@ -38,7 +63,39 @@
       type: string,
       default: '',
     },
+    showDept: {
+      type: bool,
+      default: true,
+    },
+    showDiagises: {
+      type: bool,
+      default: true,
+    },
+    showPeriod: {
+      type: bool,
+      default: true,
+    },
+    showOpera: {
+      type: bool,
+      default: true,
+    },
+    showDoctor: {
+      type: bool,
+      default: true,
+    },
+    showOrder: {
+      type: bool,
+      default: true,
+    },
   });
+  let tableData = [];
+  function defaultHeader() {
+    // 默认Object.keys(data[0])作为header
+    jsonToSheetXlsx({
+      data: tableData,
+      filename: '使用key作为默认头部.xlsx',
+    });
+  }
   const emit = defineEmits(['datePickChange', 'onOk']);
   const plainOptions = ref<Array<string>>(['按天汇总', '按月汇总', '按年汇总']);
   const checkNum = ref<string>(plainOptions.value[0]);

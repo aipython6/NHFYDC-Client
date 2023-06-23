@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useUserStore } from '@/store/modules/user';
+  import { FormOutlined } from '@ant-design/icons-vue';
   const userStore = useUserStore();
   console.log(userStore.userInfo);
   const src = 'http://localhost:3010/avatar/images/default.jfif';
@@ -10,7 +11,18 @@
   </div>
   <div class="pl-12 pt-12">
     <div class="grid gird-cols-1 gap-4 content-between h-64 text-md">
-      <a-image :src="src" :width="120" class="rounded-lg"> </a-image>
+      <div>
+        <a-image :src="src" :width="120" class="rounded-lg"> </a-image>
+        <a-tooltip placement="bottom">
+          <template #title>
+            <span>点击更换头像</span>
+          </template>
+          <FormOutlined
+            class="pl-4 cursor-pointer"
+            style="width: 10px; height: 10px; color: rgb(105, 105, 232)"
+          />
+        </a-tooltip>
+      </div>
       <div
         >姓名: <span class="font-semibold">{{ userStore.userInfo.name }}</span></div
       >

@@ -73,9 +73,7 @@ export function createRouterGuards(router: Router, whiteNameList: WhiteNameList)
       if (toCompName) {
         keepAliveStore.add(toCompName);
       } else {
-        console.warn(
-          `${to.fullPath}页面组件的keepAlive为true但未设置组件名，会导致缓存失效，请检查`,
-        );
+        console.warn(`${to.fullPath}页面组件的keepAlive为true但未设置组件名,会导致缓存失效,请检查`);
       }
     } else {
       // 不需要缓存的组件

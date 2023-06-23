@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <CommonPage @datePickChange="datePickChange" />
+      <CommonPage :title="title" @datePickChange="datePickChange" />
     </div>
     <div class="pt-8">
       <a-button type="success" @click="back">返回</a-button>
@@ -16,6 +16,7 @@
   import { getDatabyDataid } from '@/api/query/q1/queryData';
   const router = useRouter();
   const route = useRoute();
+  const title = ref<string>('');
   const back = () => {
     router.go(-1);
   };
@@ -27,7 +28,12 @@
     };
     console.log(obj);
   };
+  const getDataTitle = async (id: number) => {
+    const data = await getDatabyDataid({ dataId: id });
+    title.value = data[0].name;
+  };
   onMounted(() => {
     dataId.value = route.params.dataId;
+    getDataTitle(dataId.value);
   });
 </script>

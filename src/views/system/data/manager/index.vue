@@ -36,6 +36,8 @@
   import { Modal, Alert } from 'ant-design-vue';
   import { baseColumns, type TableListItem, type TableColumnItem } from './columns';
   import { dataSchemas } from './formSchemas';
+  import type { LoadDataParams } from '@/components/core/dynamic-table';
+  import type { TreeDataItem } from '@/core/permission/utils';
   import {
     getDataList,
     updateData,
@@ -44,9 +46,7 @@
     getDataInfo,
   } from '@/api/data/manager';
   import { useTable } from '@/components/core/dynamic-table';
-  import type { LoadDataParams } from '@/components/core/dynamic-table';
   import { useFormModal } from '@/hooks/useModal/useFormModal';
-  import type { TreeDataItem } from '@/core/permission/utils';
   import { formatDept2Tree, findChildById } from '@/core/permission/utils';
   import { getDeptList } from '@/api/system/dept';
 
@@ -95,10 +95,10 @@
     // console.log(record);
     const [formRef] = await showModal<any>({
       modalProps: {
-        title: `${record.id ? '编辑' : '新增'}用户`,
+        title: `${record.id ? '编辑' : '新增'}指标项`,
         width: 700,
         onFinish: async (values) => {
-          console.log('新增/编辑用户', values);
+          console.log('新增/编辑指标项', values);
           values.id = record.id;
           await (record.id ? updateData : createData)(values);
           dynamicTableInstance?.reload();
@@ -141,7 +141,7 @@
   const delRowConfirm = async (dataId: number | number[]) => {
     if (Array.isArray(dataId)) {
       Modal.confirm({
-        title: '确定要删除所选的用户吗?',
+        title: '确定要删除所选的指标项吗?',
         icon: createVNode(ExclamationCircleOutlined),
         centered: true,
         onOk: async () => {

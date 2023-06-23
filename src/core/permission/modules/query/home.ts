@@ -1,6 +1,6 @@
 export const Query = {
   list: '/query/index/list',
-  getDataByDataid: '/query/q1/queryDataByDataid',
+  getDataByDataid: 'sys/data/dataInfo',
 } as const;
 export const values = Object.values(Query);
 

@@ -29,7 +29,7 @@
             show-quick-jumper
             :total="total"
             @change="onChange"
-            @showSizeChange="showSizeChange"
+            @show-size-change="showSizeChange"
           />
         </div>
       </div>

@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '数据项统计',
       hideInMenu: true,
       hideInTabs: true,
-      keepAlive: true,
+      // keepAlive: true,
     },
     component: () => import('@/views/query/main/index1/index1.vue'),
   },

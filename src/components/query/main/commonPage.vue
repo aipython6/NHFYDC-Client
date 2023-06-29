@@ -23,9 +23,9 @@
         ></a-select>
         <a-input placeholder="请输入诊断名称" :disabled="showDiagises"></a-input>
         <a-radio-group
+          v-model:value="checkNum"
           :disabled="showPeriod"
           style="width: 300px"
-          v-model:value="checkNum"
           :options="plainOptions"
         />
       </div>
@@ -53,8 +53,8 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { string, bool } from 'vue-types';
-  import type { Dayjs } from 'dayjs';
   import { DownloadOutlined } from '@ant-design/icons-vue';
+  import type { Dayjs } from 'dayjs';
   import { jsonToSheetXlsx } from '@/components/basic/excel';
   type RangeVal = [Dayjs, Dayjs];
   const pickDate = ref<RangeVal>();
@@ -88,7 +88,7 @@
       default: true,
     },
   });
-  let tableData = [];
+  const tableData = [];
   function defaultHeader() {
     // 默认Object.keys(data[0])作为header
     jsonToSheetXlsx({

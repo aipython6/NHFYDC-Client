@@ -4,8 +4,14 @@
       <div class="text-md py-4"
         >您当前查询的指标为: <span class="text-red-500 font-bold">{{ props.title }}</span></div
       >
-      <div class="grid grid-cols-5 gap-4 w-full items-center">
+      <div class="grid grid-cols-6 gap-4 w-full items-center">
         <a-range-picker v-model:value="pickDate" @change="datePickChange" @ok="onOk" />
+        <a-select
+          v-model:value="selectedType"
+          :options="typeOptions"
+          :allow-clear="true"
+          :not-found-content="null"
+        ></a-select>
         <a-select
           v-model:value="value"
           show-search
@@ -97,6 +103,11 @@
     });
   }
   const emit = defineEmits(['datePickChange', 'onOk']);
+  const typeOptions = ref<any[]>([
+    { label: '门诊', value: 1 },
+    { label: '住院', value: 2 },
+    { label: '全院', value: 3 },
+  ]);
   const plainOptions = ref<Array<string>>(['按天汇总', '按月汇总', '按年汇总']);
   const checkNum = ref<string>(plainOptions.value[0]);
   const data = ref<any[]>([
@@ -104,7 +115,7 @@
     { label: '科室2', value: 2 },
   ]);
   const value = ref();
-
+  const selectedType = ref();
   const handleSearch = (val: string) => {
     if (val) {
       const t = data.value;

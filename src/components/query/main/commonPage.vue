@@ -5,7 +5,12 @@
         >您当前查询的指标为: <span class="text-red-500 font-bold">{{ props.title }}</span></div
       >
       <div class="grid grid-cols-5 gap-4 w-full items-center">
-        <a-range-picker v-model:value="pickDate" @change="datePickChange" @ok="onOk" />
+        <a-range-picker
+          v-model:value="pickDate"
+          @change="datePickChange"
+          @ok="onOk"
+          :disabled="!showDatePick"
+        />
         <a-select
           v-model:value="value"
           show-search
@@ -16,25 +21,25 @@
           :show-arrow="true"
           :filter-option="false"
           :not-found-content="null"
-          :disabled="showDept"
+          :disabled="!showDept"
           :options="data"
           @search="handleSearch"
           @change="handleChange"
         ></a-select>
-        <a-input placeholder="请输入诊断名称" :disabled="showDiagises"></a-input>
+        <a-input placeholder="请输入诊断名称" :disabled="!showDiagoses"></a-input>
         <a-radio-group
-          :disabled="showPeriod"
+          :disabled="!showPeriod"
           style="width: 300px"
           v-model:value="checkNum"
           :options="plainOptions"
         />
       </div>
       <div class="grid grid-cols-5 gap-4 pt-4">
-        <a-input placeholder="请输入手术名称" :disabled="showOpera"></a-input>
-        <a-input placeholder="请输入医生姓名" :disabled="showDoctor"></a-input>
-        <a-input placeholder="请输入医嘱内容" :disabled="showOrder"></a-input>
+        <a-input placeholder="请输入手术名称" :disabled="!showOpera"></a-input>
+        <a-input placeholder="请输入医生姓名" :disabled="!showDoctor"></a-input>
+        <a-input placeholder="请输入医嘱内容" :disabled="!showOrder"></a-input>
         <div>
-          <a-button style="width: 90px" type="primary">查询</a-button>
+          <a-button style="width: 90px" type="primary" @click="query">查询</a-button>
           <span class="pl-1 text-red-500 text-sm">(所有条件均为精确查询)</span>
         </div>
       </div>
@@ -51,9 +56,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, reactive } from 'vue';
   import { string, bool } from 'vue-types';
-  import type { Dayjs } from 'dayjs';
+  import { Dayjs } from 'dayjs';
   import { DownloadOutlined } from '@ant-design/icons-vue';
   import { jsonToSheetXlsx } from '@/components/basic/excel';
   type RangeVal = [Dayjs, Dayjs];
@@ -63,29 +68,33 @@
       type: string,
       default: '',
     },
+    showDatePick: {
+      type: bool,
+      default: false,
+    },
     showDept: {
       type: bool,
-      default: true,
+      default: false,
     },
-    showDiagises: {
+    showDiagoses: {
       type: bool,
-      default: true,
+      default: false,
     },
     showPeriod: {
       type: bool,
-      default: true,
+      default: false,
     },
     showOpera: {
       type: bool,
-      default: true,
+      default: false,
     },
     showDoctor: {
       type: bool,
-      default: true,
+      default: false,
     },
     showOrder: {
       type: bool,
-      default: true,
+      default: false,
     },
   });
   let tableData = [];
@@ -96,7 +105,7 @@
       filename: '使用key作为默认头部.xlsx',
     });
   }
-  const emit = defineEmits(['datePickChange', 'onOk']);
+  const emit = defineEmits(['datePickChange', 'onOk', 'query']);
   const plainOptions = ref<Array<string>>(['按天汇总', '按月汇总', '按年汇总']);
   const checkNum = ref<string>(plainOptions.value[0]);
   const data = ref<any[]>([
@@ -121,10 +130,35 @@
     console.log(val);
     value.value = val;
   };
+  // 选择时间
   const datePickChange = (val: RangeVal) => {
-    emit('datePickChange', val);
+    pickDate.value = val;
   };
   const onOk = (e: any) => {
     emit('onOk', e);
+  };
+  // 保存所选择的所有条件
+  interface Iobj {
+    pickDate: RangeVal;
+    deptId: number;
+    diagoese: string;
+    period: number;
+    operatorName: string;
+    doctorName: string;
+    orderName: string;
+  }
+  const objWhere = reactive<Iobj>({
+    pickDate: [undefined, undefined],
+    deptId: 0,
+    diagoese: '',
+    period: 0,
+    operatorName: '',
+    doctorName: '',
+    orderName: '',
+  });
+  const query = () => {
+    objWhere.pickDate = pickDate.value;
+
+    emit('query');
   };
 </script>

@@ -14,6 +14,8 @@ declare namespace API {
     sql: string;
     remark: string;
     status: number;
+    reqRouter: string;
+    reqMethod: string;
   };
 
   // 数据列表项
@@ -33,6 +35,8 @@ declare namespace API {
     sql: string;
     remark: string;
     status: number;
+    reqRouter: string;
+    reqMethod: string;
   };
 
   // 新增数据项
@@ -49,6 +53,8 @@ declare namespace API {
     sql: string;
     remark: string;
     status: number;
+    reqRouter: string;
+    reqMethod: string;
   };
 
   // 更新数据项

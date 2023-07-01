@@ -9,11 +9,18 @@ declare namespace API {
     secondTypeId: number;
     useDeptName: string;
     useDeptId: number;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;
     status: number;
+    showDatePick: number;
+    showDept: number;
+    showType: number;
+    showDiagnosis: number;
+    showPeriod: number;
+    showOpera: number;
+    showDoctor: number;
+    showOrder: number;
   };
 
   // 数据列表项
@@ -28,11 +35,18 @@ declare namespace API {
     secondTypeId: number;
     useDeptName: string;
     useDeptId: number;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;
     status: number;
+    showDatePick: number;
+    showDept: number;
+    showType: number;
+    showDiagnosis: number;
+    showPeriod: number;
+    showOpera: number;
+    showDoctor: number;
+    showOrder: number;
   };
 
   // 新增数据项
@@ -44,11 +58,18 @@ declare namespace API {
     secondTypeId: number;
     useDeptId: number;
     useDeptName: string;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;
     status: number;
+    showDatePick: number;
+    showDept: number;
+    showType: number;
+    showDiagnosis: number;
+    showPeriod: number;
+    showOpera: number;
+    showDoctor: number;
+    showOrder: number;
   };
 
   // 更新数据项

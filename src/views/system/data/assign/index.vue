@@ -20,13 +20,13 @@
           v-model:value="searchValue"
           style="margin-bottom: 8px; width: 500px"
           placeholder="搜索数据项"
-          allowClear
+          allow-clear
         />
         <a-tree
           checkable
           :tree-data="state.treeData"
-          :checkedKeys="checkedKeys"
-          :expandedKeys="expandedKeys"
+          :checked-keys="checkedKeys"
+          :expanded-keys="expandedKeys"
           :auto-expand-parent="autoExpandParent"
           @check="checked"
           @expand="onExpand"
@@ -47,12 +47,12 @@
 <script setup lang="ts">
   import { ref, reactive, watch } from 'vue';
   import { message } from 'ant-design-vue';
-  import { useTable } from '@/components/core/dynamic-table';
+  import { baseColumns, type TableListItem, type TableColumnItem } from './columns';
   import type { LoadDataParams } from '@/components/core/dynamic-table';
   import type { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
+  import { useTable } from '@/components/core/dynamic-table';
   import { getUserListPage } from '@/api/system/user';
   import { getIndexList, assignIndex, getIndexByUserid } from '@/api/data/assign';
-  import { baseColumns, type TableListItem, type TableColumnItem } from './columns';
 
   interface State {
     treeData: TreeDataItem[];
@@ -62,7 +62,7 @@
   });
   const visible = ref(false);
   const userId = ref<number>(0);
-  const [DynamicTable, dynamicTableInstance] = useTable({ formProps: { autoSubmitOnEnter: true } });
+  const [DynamicTable] = useTable({ formProps: { autoSubmitOnEnter: true } });
   const loadTableData = async (params: LoadDataParams) => {
     const data = await getUserListPage({
       ...params,

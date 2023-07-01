@@ -5,12 +5,19 @@
         >您当前查询的指标为: <span class="text-red-500 font-bold">{{ props.title }}</span></div
       >
       <div class="grid grid-cols-6 gap-4 w-full items-center">
-        <a-range-picker v-model:value="pickDate" @change="datePickChange" @ok="onOk" />
+        <a-range-picker
+          v-model:value="pickDate"
+          :disabled="showDatePick"
+          @change="datePickChange"
+          @ok="onOk"
+        />
         <a-select
           v-model:value="selectedType"
+          placeholder="查询类别"
           :options="typeOptions"
           :allow-clear="true"
           :not-found-content="null"
+          :disabled="showType"
         ></a-select>
         <a-select
           v-model:value="value"
@@ -27,7 +34,7 @@
           @search="handleSearch"
           @change="handleChange"
         ></a-select>
-        <a-input placeholder="请输入诊断名称" :disabled="showDiagises"></a-input>
+        <a-input placeholder="请输入诊断名称" :disabled="showDiagnosis"></a-input>
         <a-radio-group
           v-model:value="checkNum"
           :disabled="showPeriod"
@@ -69,11 +76,19 @@
       type: string,
       default: '',
     },
+    showDatePick: {
+      type: bool,
+      default: true,
+    },
     showDept: {
       type: bool,
       default: true,
     },
-    showDiagises: {
+    showType: {
+      type: bool,
+      default: true,
+    },
+    showDiagnosis: {
       type: bool,
       default: true,
     },

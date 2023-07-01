@@ -2,10 +2,10 @@
   <div class="content">
     <div class="pb-4">
       <a-select
-        v-model:value="remark"
+        v-model:value="remarkName"
         style="width: 200px"
         :options="options"
-        @change="selectOption"
+        @change="handleChange"
       ></a-select>
     </div>
     <div>
@@ -15,6 +15,15 @@
         :columns="columns"
         :scroll="{ x: 2000 }"
       >
+        <template #toolbar>
+          <a-button
+            type="primary"
+            :disabled="!$auth('sys.data.dict.add')"
+            @click="openDictModal({})"
+          >
+            新增
+          </a-button>
+        </template>
       </DynamicTable>
     </div>
   </div>
@@ -24,19 +33,25 @@
   import { message } from 'ant-design-vue';
   import { baseColumns, type TableListItem, type TableColumnItem } from './columns';
   import type { LoadDataParams } from '@/components/core/dynamic-table';
+  import { dictSchemas } from './formSchemas';
   import { useTable } from '@/components/core/dynamic-table';
+  import { useFormModal } from '@/hooks/useModal/useFormModal';
   import {
-    getDictById,
+    getDictDataById,
     list,
-    addDict,
+    createDict,
     updateDict,
     deleteDict,
     getAllDicts,
   } from '@/api/data/dict/';
   const visible = ref<Boolean>(false);
   const options = ref<API.options>([]);
-  const remarkId = ref<Number>(0);
-  const [DynamicTable] = useTable({ formProps: { autoSubmitOnEnter: true } });
+  // 选中该值的value
+  const remarkId = ref<Number>(1);
+  // 显示选中的label
+  const remarkName = ref<String>('');
+  const [DynamicTable, dynamicTableInstance] = useTable({ formProps: { autoSubmitOnEnter: true } });
+  const [showModal] = useFormModal();
   const loadTableData = async (params: LoadDataParams) => {
     const data = await list({
       ...params,
@@ -44,15 +59,40 @@
     });
     return data;
   };
-  const openDictModal = (record: Partial<TableListItem> = {}) => {
-    visible.value = true;
+  const openDictModal = async (record: Partial<TableListItem> = {}) => {
+    // console.log(record);
+    const [formRef] = await showModal<any>({
+      modalProps: {
+        title: `${record.id ? '编辑' : '新增'}指标项`,
+        width: 700,
+        onFinish: async (values) => {
+          console.log('新增/编辑指标项', values);
+          values.id = record.id;
+          await (record.id ? updateDict : createDict)(values);
+          dynamicTableInstance?.reload();
+        },
+      },
+      formProps: {
+        labelWidth: 100,
+        schemas: dictSchemas,
+        autoSubmitOnEnter: true,
+      },
+    });
+    formRef?.setFieldsValue(record);
+    if (record?.id) {
+      const data = await getDictDataById({ id: record.id });
+      formRef?.setFieldsValue(data);
+    }
   };
   const initOptions = async () => {
     options.value = await getAllDicts();
-    console.log(options.value);
   };
-  const selectOption = (e: string) => {
+  const handleChange = (e: string) => {
     console.log(e);
+  };
+  const delRowConfirm = async (record: TableListItem) => {
+    await deleteDict({ id: record.id });
+    dynamicTableInstance.reload();
   };
   const columns: TableColumnItem[] = [
     ...baseColumns,
@@ -64,12 +104,20 @@
       fixed: 'right',
       actions: ({ record }) => [
         {
-          label: '指标分配',
+          label: '编辑',
           auth: {
-            perm: 'sys.data.assignIndex',
+            perm: 'sys.data.dict.update',
             effect: 'disable',
           },
           onClick: () => openDictModal(record),
+        },
+        {
+          label: '删除',
+          auth: 'sys.data.dict.delete',
+          popConfirm: {
+            title: '你确定要删除吗？',
+            onConfirm: () => delRowConfirm(record),
+          },
         },
       ],
     },

@@ -89,10 +89,10 @@
   };
 
   /**
-   * @description 打开用户弹窗
+   * @description 打开指标项弹窗
    */
   const openDataModal = async (record: Partial<TableListItem> = {}) => {
-    // console.log(record);
+    console.log(record);
     const [formRef] = await showModal<any>({
       modalProps: {
         title: `${record.id ? '编辑' : '新增'}指标项`,

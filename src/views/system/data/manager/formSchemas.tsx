@@ -51,6 +51,18 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     rules: [{ required: true, type: 'number', message: '请选择科室' }],
   },
   {
+    field: 'reqRouter',
+    component: 'Input',
+    label: '请求路由',
+    rules: [{ required: true, type: 'string' }],
+  },
+  {
+    field: 'reqMethod',
+    component: 'Input',
+    label: '请求方法',
+    rules: [{ required: true, type: 'string' }],
+  },
+  {
     field: 'dataSource',
     component: 'Input',
     label: '数据来源',
@@ -108,7 +120,9 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     field: 'showType',
     component: 'RadioGroup',
     label: '是否显示类别',
-    defaultValue: 1,
+    defaultValue: ({ record }) => {
+      return record.showType;
+    },
     componentProps: {
       options: [
         {

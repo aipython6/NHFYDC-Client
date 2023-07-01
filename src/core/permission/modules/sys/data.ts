@@ -19,6 +19,7 @@ export const sysData = {
   // 根据id获取对应的字典信息
   getDictById: 'sys/data/dict/getDictById',
   getAllDicts: 'sys/data/dict/allDicts',
+  getDictDataById: 'sys/data/dict/getDictDataById',
 } as const;
 
 export const values = Object.values(sysData);

@@ -15,6 +15,14 @@ declare namespace API {
     status: number;
     reqRouter: string;
     reqMethod: string;
+    showDatePick: number;
+    showDept: number;
+    showType: number;
+    showDiagnosis: number;
+    showPeriod: number;
+    showOpera: number;
+    showDoctor: number;
+    showOrder: number;
   };
 
   // 数据列表项
@@ -52,6 +60,14 @@ declare namespace API {
     status: number;
     reqRouter: string;
     reqMethod: string;
+    showDatePick: number;
+    showDept: number;
+    showType: number;
+    showDiagnosis: number;
+    showPeriod: number;
+    showOpera: number;
+    showDoctor: number;
+    showOrder: number;
   };
 
   // 更新数据项

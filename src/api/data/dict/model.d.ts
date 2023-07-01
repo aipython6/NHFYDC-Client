@@ -16,7 +16,7 @@ declare namespace API {
   type DictList = DictInfo[];
   type addDictParams = {
     name: string;
-    type: number;
+    type: string;
     createdAt: string;
     updatedAt: string;
     remark: string;

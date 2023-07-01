@@ -26,15 +26,28 @@ export function getDictById(data: { remarkId: number }) {
   );
 }
 
-export function addDict(data: API.addDictParams) {
-  return request(
+export function getDictDataById(data: { id: number }) {
+  return request<API.DictInfo>(
     {
-      url: Api.dictAdd,
+      url: Api.getDictDataById,
       method: 'get',
-      data,
+      params: data,
     },
     {
       isGetDataDirectly: true,
+    },
+  );
+}
+
+export function createDict(data: API.addDictParams) {
+  return request(
+    {
+      url: Api.dictAdd,
+      method: 'post',
+      data,
+    },
+    {
+      successMsg: '创建成功',
     },
   );
 }
@@ -44,7 +57,7 @@ export function list(data: API.PageParams) {
     {
       url: Api.dictList,
       method: 'get',
-      data,
+      params: data,
     },
     {
       isGetDataDirectly: true,
@@ -56,11 +69,11 @@ export function updateDict(data: API.updateDictParams) {
   return request<API.updateDictParams>(
     {
       url: Api.dictUpdate,
-      method: 'get',
+      method: 'post',
       data,
     },
     {
-      isGetDataDirectly: true,
+      successMsg: '修改成功',
     },
   );
 }
@@ -70,10 +83,10 @@ export function deleteDict(data: { id: number }) {
     {
       url: Api.dictDelete,
       method: 'get',
-      data,
+      params: data,
     },
     {
-      isGetDataDirectly: true,
+      successMsg: '删除成功',
     },
   );
 }

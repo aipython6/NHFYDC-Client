@@ -66,7 +66,7 @@ export function deleteDatas(data: { ids: number[] }) {
   );
 }
 
-export function getTypeList(data: { type: number }) {
+export function getTypeList(data: { type: number; remark_id: number }) {
   return request<API.dataTypeList>(
     {
       url: Api.managerGetType,

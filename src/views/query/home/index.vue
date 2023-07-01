@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="indexLists.length > 0" class="bg-white p-4">
+    <div v-show="total > 0" class="bg-white p-4">
       <div class="">
         <h3 class="text-blue-600">{{ userStore.userCode }}您拥有的指标项如下:</h3>
         <a-input-search
@@ -15,7 +15,7 @@
         <a-list bordered :data-source="indexLists">
           <template #renderItem="{ item }">
             <a-list-item class="text-md cursor-pointer hover:bg-violet-100">
-              <router-link :to="`/query/home/dataId=${item.dataId}`"
+              <router-link :to="`/query/children/dataId=${item.dataId}`"
                 >{{ item.id }}.{{ item.dataName }}</router-link
               >
             </a-list-item>
@@ -26,15 +26,16 @@
         <div class="pt-4 flex order-1">
           <a-pagination
             v-model:current="current"
-            show-quick-jumper
+            show-size-changer
             :total="total"
+            :show-total="(total) => `共 ${total} 条`"
             @change="onChange"
             @show-size-change="showSizeChange"
           />
         </div>
       </div>
     </div>
-    <div v-show="indexLists.length === 0">
+    <div v-show="total === 0">
       <a-result status="404" sub-title="您暂时没有可查询的指标项">
         <template #extra>
           <a-button type="primary" @click="backHome">回到首页</a-button>

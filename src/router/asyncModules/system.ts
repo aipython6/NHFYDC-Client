@@ -15,4 +15,5 @@ export default {
     import('@/views/system/param-config/config-list.vue'),
   'views/system/data/manager': () => import('@/views/system/data/manager/index.vue'),
   'view/system/data/assign': () => import('@/views/system/data/assign/index.vue'),
+  'view/system/data/dict': () => import('@/views/system/data/dict/index.vue'),
 } as const;

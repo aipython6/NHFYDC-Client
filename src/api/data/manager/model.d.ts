@@ -9,7 +9,6 @@ declare namespace API {
     secondTypeId: number;
     useDeptName: string;
     useDeptId: number;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;
@@ -30,7 +29,6 @@ declare namespace API {
     secondTypeId: number;
     useDeptName: string;
     useDeptId: number;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;
@@ -48,7 +46,6 @@ declare namespace API {
     secondTypeId: number;
     useDeptId: number;
     useDeptName: string;
-    database: string;
     dataSource: string;
     sql: string;
     remark: string;

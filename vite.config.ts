@@ -144,7 +144,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
     server: {
       host: '0.0.0.0',
-      port: 8088,
+      // port: 8088,
+      port: 9100,
       proxy: {
         '/api': {
           // target: 'https://nest-api.buqiyuan.site/api/',

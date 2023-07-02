@@ -10,10 +10,17 @@
         :showOperator="childrenForm.showOpera"
         :showDoctor="childrenForm.showDoctor"
         :showOrder="childrenForm.showOrder"
-        @datePickChange="datePickChange"
+        @query="query"
       />
     </div>
-    <div class="pt-8">
+    <div class="pt-4">
+      <showData
+        :dataList="dataList"
+        :downloadDataList="downloadDataList"
+        :fileName="childrenForm.title"
+      />
+    </div>
+    <div class="py-8">
       <a-button type="info" @click="back">返回</a-button>
     </div>
   </div>
@@ -21,11 +28,26 @@
 <script setup lang="ts">
   import { onMounted, ref, reactive } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import type { Dayjs } from 'dayjs';
-  import CommonPage from '@/components/query/index';
-  import { getDatabyDataid } from '@/api/query/q1/queryData';
+  import { CommonPage, showData } from '@/components/query/index';
+  import { getDatabyDataid } from '@/api/query/home';
+  import { qBasicQuery } from '@/core/permission/modules/query/main/qBasic';
+  import { basicSum } from '@/api/query/main/qBasic';
   const router = useRouter();
   const route = useRoute();
+  const back = () => {
+    router.go(-1);
+  };
+  // 维护提交给服务端的所有变量
+  interface state {
+    deptName: string | number;
+    pickDate: Array<String>;
+    typeName: string | number;
+    diagnosisName: string | number;
+    periodName: string | number;
+    operaName: string | number;
+    doctorName: string | number;
+    orderName: string | number;
+  }
 
   // 维护传递给子组件的所有变量
   interface childrenState {
@@ -52,18 +74,23 @@
     showOrder: 0,
   });
 
-  const back = () => {
-    router.go(-1);
+  const reqRouter = ref<string>('');
+  const reqMethod = ref<string>('');
+  // 最终要展示的数据列表
+  const dataList = ref([]);
+  // 用户导出的数据列表
+  const downloadDataList = ref([]);
+  const query = async (submitForm: state) => {
+    const req_router = qBasicQuery[reqRouter.value];
+    const req_method = reqMethod.value;
+    const data = await basicSum(req_router, req_method, submitForm);
+    dataList.value = data.dataList;
+    downloadDataList.value = data.downloadDataList;
   };
+
+  // 初始化数据项内容
   const dataId = ref<any>('');
-  const datePickChange = (dates: Dayjs[]) => {
-    const obj = {
-      date1: dates[0].format('YYYY-MM-DD HH:MM:ss'),
-      date2: dates[1].format('YYYY-MM-DD HH:MM:ss'),
-    };
-    console.log(obj);
-  };
-  const getDataTitle = async (id: number) => {
+  const initData = async (id: number) => {
     const data = await getDatabyDataid({ dataId: id });
     childrenForm.title = data.name;
     childrenForm.showDept = data.showDept;
@@ -74,9 +101,11 @@
     childrenForm.showDiagnosis = data.showDiagnosis;
     childrenForm.showDoctor = data.showDoctor;
     childrenForm.showOrder = data.showOrder;
+    reqRouter.value = data.reqRouter;
+    reqMethod.value = data.reqMethod;
   };
   onMounted(() => {
     dataId.value = route.params.dataId;
-    getDataTitle(dataId.value);
+    initData(dataId.value);
   });
 </script>

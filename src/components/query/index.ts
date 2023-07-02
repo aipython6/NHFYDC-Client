@@ -1,2 +1,4 @@
 import CommonPage from './main/commonPage.vue';
-export default CommonPage;
+import showData from './main/showData.vue';
+export { CommonPage };
+export { showData };

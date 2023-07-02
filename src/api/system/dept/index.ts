@@ -55,11 +55,16 @@ export function deleteDept(data: API.DelDeptParams) {
  * @returns
  */
 export function updateDept(data: API.UpdateDeptParams) {
-  return request({
-    url: Api.update,
-    method: 'post',
-    data,
-  });
+  return request(
+    {
+      url: Api.update,
+      method: 'post',
+      data,
+    },
+    {
+      successMsg: '修改成功',
+    },
+  );
 }
 
 /**
@@ -68,11 +73,16 @@ export function updateDept(data: API.UpdateDeptParams) {
  * @returns
  */
 export function createDept(data: API.CreateDeptParams) {
-  return request({
-    url: Api.add,
-    method: 'post',
-    data,
-  });
+  return request(
+    {
+      url: Api.add,
+      method: 'post',
+      data,
+    },
+    {
+      successMsg: '添加成功',
+    },
+  );
 }
 /**
  * @description 查询单个部门信息
@@ -93,11 +103,16 @@ export function getDeptInfo(query: { departmentId: string | number }) {
  * @returns
  */
 export function transferDept(data: API.TransferDeptParams) {
-  return request({
-    url: Api.transfer,
-    method: 'post',
-    data,
-  });
+  return request(
+    {
+      url: Api.transfer,
+      method: 'post',
+      data,
+    },
+    {
+      successMsg: '转换成功',
+    },
+  );
 }
 
 /**

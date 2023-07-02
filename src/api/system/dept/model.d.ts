@@ -68,8 +68,9 @@ declare namespace API {
   };
 
   type deptNameResult = {
-    id: number;
+    id?: number;
     name: string;
+    HISdeptID: string;
   };
 
   type deptNameList = deptNameResult[];

@@ -14,3 +14,16 @@ export function userIndexList(data: { userCode: string; limit?: number; page?: n
     },
   );
 }
+// 根据dataid获取对应的信息
+export function getDatabyDataid(data: { dataId: number }) {
+  return request(
+    {
+      url: Api.getDataByDataid,
+      method: 'get',
+      params: data,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
+}

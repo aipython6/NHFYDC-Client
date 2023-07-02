@@ -31,4 +31,16 @@ declare namespace API {
     /** 业务上的请求是否成功 */
     success?: boolean;
   };
+
+  // 所有数据查询的可能参数
+  type queryDataParams = {
+    deptName?: string | number;
+    pickDate?: Array<String>;
+    typeName?: string | number;
+    diagnosisName?: string | number;
+    periodName?: string | number;
+    operaName?: string | number;
+    doctorName?: string | number;
+    orderName?: string | number;
+  } & { page?: number; limit?: number };
 }

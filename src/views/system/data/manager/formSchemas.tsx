@@ -120,9 +120,7 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     field: 'showType',
     component: 'RadioGroup',
     label: '是否显示类别',
-    defaultValue: ({ record }) => {
-      return record.showType;
-    },
+    defaultValue: 1,
     componentProps: {
       options: [
         {
@@ -212,6 +210,24 @@ export const dataSchemas: FormSchema<API.addDataParams>[] = [
     field: 'showOrder',
     component: 'RadioGroup',
     label: '是否显示医嘱',
+    defaultValue: 1,
+    componentProps: {
+      options: [
+        {
+          label: '是',
+          value: 1,
+        },
+        {
+          label: '否',
+          value: 0,
+        },
+      ],
+    },
+  },
+  {
+    field: 'showNum',
+    component: 'RadioGroup',
+    label: '门诊或住院号',
     defaultValue: 1,
     componentProps: {
       options: [

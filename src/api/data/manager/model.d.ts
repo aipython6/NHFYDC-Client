@@ -23,6 +23,7 @@ declare namespace API {
     showOpera: number;
     showDoctor: number;
     showOrder: number;
+    showNum: number;
   };
 
   // 数据列表项
@@ -68,6 +69,7 @@ declare namespace API {
     showOpera: number;
     showDoctor: number;
     showOrder: number;
+    showNum: number;
   };
 
   // 更新数据项

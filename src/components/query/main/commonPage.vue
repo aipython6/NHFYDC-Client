@@ -42,12 +42,17 @@
         >
         </a-select>
         <a-input
+          v-model:value="form.numName"
+          placeholder="请输入门诊号或住院号"
+          :disabled="!props.showNum"
+        ></a-input>
+      </div>
+      <div class="grid grid-cols-5 gap-4 pt-4">
+        <a-input
           v-model:value="form.diagnosisName"
           placeholder="请输入诊断名称"
           :disabled="!props.showDiagnosis"
         ></a-input>
-      </div>
-      <div class="grid grid-cols-5 gap-4 pt-4">
         <a-input
           v-model:value="form.operaName"
           placeholder="请输入手术名称"
@@ -114,6 +119,10 @@
       type: number,
       default: 0,
     },
+    showNum: {
+      type: number,
+      default: 0,
+    },
   });
 
   // 保存用户选择的所有条件
@@ -126,6 +135,7 @@
     operaName: string | number;
     doctorName: string | number;
     orderName: string | number;
+    numName: string | number;
   }
 
   const form = reactive<state>({
@@ -137,6 +147,7 @@
     operaName: '',
     doctorName: '',
     orderName: '',
+    numName: '',
   });
 
   const submitForm = reactive<state>({
@@ -148,6 +159,7 @@
     operaName: form.operaName,
     doctorName: form.doctorName,
     orderName: form.orderName,
+    numName: form.numName,
   });
 
   // 所有的options

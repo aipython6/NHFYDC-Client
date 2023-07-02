@@ -47,6 +47,7 @@
     operaName: string | number;
     doctorName: string | number;
     orderName: string | number;
+    numName: string | number;
   }
 
   // 维护传递给子组件的所有变量
@@ -60,6 +61,7 @@
     showOpera: number;
     showDoctor: number;
     showOrder: number;
+    showNum: number;
   }
 
   const childrenForm = reactive<childrenState>({
@@ -72,6 +74,7 @@
     showOpera: 0,
     showDoctor: 0,
     showOrder: 0,
+    showNum: 0,
   });
 
   const reqRouter = ref<string>('');
@@ -101,6 +104,7 @@
     childrenForm.showDiagnosis = data.showDiagnosis;
     childrenForm.showDoctor = data.showDoctor;
     childrenForm.showOrder = data.showOrder;
+    childrenForm.showNum = data.showNum;
     reqRouter.value = data.reqRouter;
     reqMethod.value = data.reqMethod;
   };

@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="py-2">
-      <a-button type="success" @click="defaultHeader"
+      <a-button type="success" @click="defaultHeader" :disabled="props.dataList.length <= 0"
         >导出
         <template #icon>
           <DownloadOutlined />

@@ -59,18 +59,21 @@ export const baseColumns: TableColumnItem[] = [
     width: 120,
     align: 'center',
     dataIndex: 'email',
+    hideInSearch: true,
   },
   {
     title: '手机',
     width: 120,
     align: 'center',
     dataIndex: 'phone',
+    hideInSearch: true,
   },
   {
     title: '备注',
     width: 120,
     align: 'center',
     dataIndex: 'remark',
+    hideInSearch: true,
   },
   {
     title: '状态',

@@ -89,6 +89,7 @@ export const useUserStore = defineStore({
         this.name = userInfo.name;
         this.avatar = userInfo.headImg;
         this.userInfo = userInfo;
+        // console.log(this.userInfo);
         // 生成路由
         const generatorResult = await generatorDynamicRouter(menus);
         this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu);

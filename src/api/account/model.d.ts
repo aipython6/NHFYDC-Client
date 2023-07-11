@@ -47,5 +47,6 @@ declare namespace API {
     status: number;
     roles: number[];
     departmentName: string;
+    HISDeptId: string;
   };
 }

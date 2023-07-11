@@ -29,11 +29,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, reactive, watch, onMounted } from 'vue';
-  import { message } from 'ant-design-vue';
+  import { ref, onMounted } from 'vue';
   import { baseColumns, type TableListItem, type TableColumnItem } from './columns';
-  import type { LoadDataParams } from '@/components/core/dynamic-table';
   import { dictSchemas } from './formSchemas';
+  import type { LoadDataParams } from '@/components/core/dynamic-table';
   import { useTable } from '@/components/core/dynamic-table';
   import { useFormModal } from '@/hooks/useModal/useFormModal';
   import {
@@ -44,7 +43,6 @@
     deleteDict,
     getAllDicts,
   } from '@/api/data/dict/';
-  const visible = ref<Boolean>(false);
   const options = ref<API.options>([]);
   // 选中该值的value
   const remarkId = ref<Number>(1);

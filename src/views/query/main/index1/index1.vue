@@ -3,21 +3,21 @@
     <div>
       <CommonPage
         :title="childrenForm.title"
-        :showDatePick="childrenForm.showDatePick"
-        :showDept="childrenForm.showDept"
-        :showDiagnosis="childrenForm.showDiagnosis"
-        :showPeriod="childrenForm.showPeriod"
-        :showOperator="childrenForm.showOpera"
-        :showDoctor="childrenForm.showDoctor"
-        :showOrder="childrenForm.showOrder"
+        :show-date-pick="childrenForm.showDatePick"
+        :show-dept="childrenForm.showDept"
+        :show-diagnosis="childrenForm.showDiagnosis"
+        :show-period="childrenForm.showPeriod"
+        :show-operator="childrenForm.showOpera"
+        :show-doctor="childrenForm.showDoctor"
+        :show-order="childrenForm.showOrder"
         @query="query"
       />
     </div>
     <div class="pt-4">
       <showData
-        :dataList="dataList"
-        :downloadDataList="downloadDataList"
-        :fileName="childrenForm.title"
+        :data-List="dataList"
+        :download-datalist="downloadDataList"
+        :file-name="childrenForm.title"
       />
     </div>
     <div class="py-8">
@@ -84,9 +84,9 @@
   // 用户导出的数据列表
   const downloadDataList = ref([]);
   const query = async (submitForm: state) => {
-    const req_router = qBasicQuery[reqRouter.value];
-    const req_method = reqMethod.value;
-    const data = await basicSum(req_router, req_method, submitForm);
+    const reqRouter1 = qBasicQuery[reqRouter.value];
+    const reqMethod1 = reqMethod.value;
+    const data = await basicSum(reqRouter1, reqMethod1, submitForm);
     dataList.value = data.dataList;
     downloadDataList.value = data.downloadDataList;
   };

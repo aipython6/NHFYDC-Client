@@ -11,6 +11,7 @@
           @change="datePickChange"
         />
         <a-select
+          v-show="!props.pageProp"
           placeholder="请选择查询类别"
           v-model:value="form.typeName"
           :disabled="!props.showType"
@@ -19,6 +20,7 @@
         >
         </a-select>
         <a-select
+          v-show="!props.pageProp"
           v-model:value="form.deptName"
           show-search
           placeholder="请输入科室名称"
@@ -33,7 +35,22 @@
           @search="deptSearch"
           @change="deptChange"
         ></a-select>
+        <!-- 专用于科室自助页面 -->
         <a-select
+          v-show="props.pageProp"
+          v-model:value="form.selfDeptName"
+          placeholder="请输入科室名称"
+          style="width: 100%"
+          :default-active-first-option="false"
+          :allow-clear="true"
+          :show-arrow="true"
+          :filter-option="false"
+          :not-found-content="null"
+          :options="props.selfDeptOptions"
+          @change="deptChange"
+        ></a-select>
+        <a-select
+          v-show="!props.pageProp"
           v-model:value="form.periodName"
           placeholder="请选择时间段类别"
           :disabled="!props.showPeriod"
@@ -42,6 +59,7 @@
         >
         </a-select>
         <a-input
+          v-show="!props.pageProp"
           v-model:value="form.numName"
           placeholder="请输入门诊号或住院号"
           :disabled="!props.showNum"
@@ -49,21 +67,25 @@
       </div>
       <div class="grid grid-cols-5 gap-4 pt-4">
         <a-input
+          v-show="!props.pageProp"
           v-model:value="form.diagnosisName"
           placeholder="请输入诊断名称"
           :disabled="!props.showDiagnosis"
         ></a-input>
         <a-input
+          v-show="!props.pageProp"
           v-model:value="form.operaName"
           placeholder="请输入手术名称"
           :disabled="!props.showOpera"
         ></a-input>
         <a-input
+          v-show="!props.pageProp"
           v-model:value="form.doctorName"
           placeholder="请输入医生姓名"
           :disabled="!props.showDoctor"
         ></a-input>
         <a-input
+          v-show="!props.pageProp"
           v-model:value="form.orderName"
           placeholder="请输入医嘱内容"
           :disabled="!props.showOrder"
@@ -83,6 +105,10 @@
   import { getDeptByName } from '@/api/system/dept';
   type RangeVal = [Dayjs, Dayjs];
   const props = defineProps({
+    pageProp: {
+      type: number,
+      default: 0,
+    },
     title: {
       type: string,
       default: '',
@@ -123,6 +149,14 @@
       type: number,
       default: 0,
     },
+    showSelfDept: {
+      type: number,
+      default: 0,
+    },
+    selfDeptOptions: {
+      type: Array,
+      default: [],
+    },
   });
 
   // 保存用户选择的所有条件
@@ -136,6 +170,7 @@
     doctorName: string | number;
     orderName: string | number;
     numName: string | number;
+    selfDeptName: string | number;
   }
 
   const form = reactive<state>({
@@ -148,6 +183,7 @@
     doctorName: '',
     orderName: '',
     numName: '',
+    selfDeptName: '',
   });
 
   const submitForm = reactive<state>({
@@ -160,6 +196,7 @@
     doctorName: form.doctorName,
     orderName: form.orderName,
     numName: form.numName,
+    selfDeptName: form.selfDeptName,
   });
 
   // 所有的options

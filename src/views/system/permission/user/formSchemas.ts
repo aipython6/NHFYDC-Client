@@ -47,6 +47,15 @@ export const userSchemas: FormSchema<API.CreateUserParams>[] = [
     rules: [{ required: true, type: 'number' }],
   },
   {
+    field: 'deptData',
+    component: 'TreeSelect',
+    label: '科室数据',
+    componentProps: {
+      getPopupContainer: () => document.body,
+    },
+    rules: [{ required: true, type: 'number' }],
+  },
+  {
     field: 'roles',
     component: 'Select',
     label: '所属角色',

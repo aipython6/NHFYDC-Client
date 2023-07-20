@@ -9,7 +9,7 @@
         </template>
       </a-button>
       <span class="text-red-500 font-bold text-md pl-2"
-        >(若数据大于3条,因页面空间有限,此处只展示前3条数据,若要浏览全部数据,请导出~)</span
+        >(因页面空间有限,若数据大于3条,只展示前3条数据,若要浏览全部数据,请导出后浏览~)</span
       >
     </div>
     <div v-if="props.dataList.length > 0">

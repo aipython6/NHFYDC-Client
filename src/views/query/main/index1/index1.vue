@@ -16,7 +16,7 @@
     <div class="pt-4">
       <showData
         :data-List="dataList"
-        :download-datalist="downloadDataList"
+        :downloadDataList="downloadDataList"
         :file-name="childrenForm.title"
       />
     </div>

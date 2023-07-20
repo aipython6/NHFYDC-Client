@@ -11,6 +11,7 @@ declare namespace API {
   type UserListPageResultItem = {
     createdAt: string;
     departmentId: number;
+    deptData: [];
     email: string;
     headImg: string;
     id: number;
@@ -31,6 +32,7 @@ declare namespace API {
 
   /** 创建用户参数 */
   type CreateUserParams = {
+    deptData: [];
     departmentId: number;
     name: string;
     username: string;
@@ -44,6 +46,7 @@ declare namespace API {
 
   /** 管理员用户详情 */
   type AdminUserInfo = {
+    deptData: [];
     createTime: string;
     updateTime: string;
     id: number;

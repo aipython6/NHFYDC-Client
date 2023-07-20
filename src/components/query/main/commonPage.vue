@@ -103,6 +103,7 @@
   import { string, number } from 'vue-types';
   import type { Dayjs } from 'dayjs';
   import { getDeptByName } from '@/api/system/dept';
+  import { message } from 'ant-design-vue';
   type RangeVal = [Dayjs, Dayjs];
   const props = defineProps({
     pageProp: {
@@ -266,6 +267,10 @@
   };
 
   const query = () => {
+    if (!submitForm.pickDate.length) {
+      message.warning('请选择时间');
+      return;
+    }
     emit('query', submitForm);
   };
 </script>

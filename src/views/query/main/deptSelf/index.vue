@@ -14,16 +14,15 @@
   import type { Dayjs } from 'dayjs';
   const userStore = useUserStore();
 
-  interface deptStat {
-    HISdeptID: string;
-    deptName: string;
-  }
-  const deptOptions = ref<Array<deptStat>>([]);
+  const deptOptions = ref<API.deptDataType[] | undefined>([]);
   type RangeVal = [Dayjs, Dayjs];
   interface propState {
     pageProp: number;
     showDatePick: number;
   }
   const props = reactive<propState>({ pageProp: 1, showDatePick: 1 });
-  onMounted(() => {});
+  onMounted(() => {
+    const depts = userStore.userInfo?.deptData;
+    deptOptions.value = depts;
+  });
 </script>

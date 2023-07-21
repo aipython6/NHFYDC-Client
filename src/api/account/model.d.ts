@@ -48,5 +48,10 @@ declare namespace API {
     roles: number[];
     departmentName: string;
     HISDeptId: string;
+    deptData: deptDataType[];
+  };
+  type deptDataType = {
+    value: string;
+    label: string;
   };
 }

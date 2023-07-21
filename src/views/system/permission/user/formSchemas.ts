@@ -51,9 +51,11 @@ export const userSchemas: FormSchema<API.CreateUserParams>[] = [
     component: 'TreeSelect',
     label: '科室数据',
     componentProps: {
+      multiple: true,
+      treeCheckable: true,
       getPopupContainer: () => document.body,
     },
-    rules: [{ required: true, type: 'number' }],
+    rules: [{ required: true, type: 'array' }],
   },
   {
     field: 'roles',

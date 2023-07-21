@@ -68,6 +68,7 @@ declare namespace API {
   /** 更新管理员用户参数 */
   type UpdateAdminInfoParams = {
     departmentId: number;
+    deptData: [];
     name: string;
     username: string;
     roles: number[];

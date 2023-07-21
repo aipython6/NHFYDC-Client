@@ -239,10 +239,21 @@
         autoSubmitOnEnter: true,
       },
     });
-
+    // 科室数据
     formRef?.updateSchema([
       {
         field: 'departmentId',
+        componentProps: {
+          treeDefaultExpandedKeys:
+            findChildById(record?.departmentId, state.deptTree)?.keyPath || [],
+          treeData: state.deptTree,
+        },
+      },
+    ]);
+
+    formRef?.updateSchema([
+      {
+        field: 'deptData',
         componentProps: {
           treeDefaultExpandedKeys:
             findChildById(record?.departmentId, state.deptTree)?.keyPath || [],

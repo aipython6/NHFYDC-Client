@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <div class="text-md py-4"
+      <div class="text-md py-4" v-show="!props.pageProp"
         >您当前查询的指标为: <span class="text-red-500 font-bold">{{ props.title }}</span></div
       >
       <div class="grid grid-cols-5 gap-4 w-full items-center">
@@ -41,10 +41,9 @@
           v-model:value="form.selfDeptName"
           placeholder="请输入科室名称"
           style="width: 100%"
-          :default-active-first-option="false"
+          mode="multiple"
           :allow-clear="true"
           :show-arrow="true"
-          :filter-option="false"
           :not-found-content="null"
           :options="props.selfDeptOptions"
           @change="deptChange"
@@ -100,7 +99,7 @@
 </template>
 <script lang="ts" setup>
   import { reactive } from 'vue';
-  import { string, number } from 'vue-types';
+  import { string, number, array } from 'vue-types';
   import type { Dayjs } from 'dayjs';
   import { getDeptByName } from '@/api/system/dept';
   import { message } from 'ant-design-vue';
@@ -155,7 +154,7 @@
       default: 0,
     },
     selfDeptOptions: {
-      type: Array,
+      type: array,
       default: [],
     },
   });
@@ -171,7 +170,7 @@
     doctorName: string | number;
     orderName: string | number;
     numName: string | number;
-    selfDeptName: string | number;
+    selfDeptName: string[];
   }
 
   const form = reactive<state>({
@@ -184,7 +183,7 @@
     doctorName: '',
     orderName: '',
     numName: '',
-    selfDeptName: '',
+    selfDeptName: [],
   });
 
   const submitForm = reactive<state>({

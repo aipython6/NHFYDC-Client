@@ -46,10 +46,19 @@
           :show-arrow="true"
           :not-found-content="null"
           :options="props.selfDeptOptions"
-          @change="deptChange"
+          @change="selfDeptChange"
         ></a-select>
         <a-select
-          v-show="!props.pageProp"
+        v-show="props.pageProp"
+          v-model:value="form.sumTypeName"
+          placeholder="请汇总类别"
+          :disabled="!props.showSumType"
+          :options="options.sumOptions"
+          @change="sumTypeChange"
+        >
+        </a-select>
+        <a-select
+        v-show="!props.pageProp"
           v-model:value="form.periodName"
           placeholder="请选择时间段类别"
           :disabled="!props.showPeriod"
@@ -99,82 +108,73 @@
 </template>
 <script lang="ts" setup>
   import { reactive } from 'vue';
-  import { string, number, array } from 'vue-types';
   import type { Dayjs } from 'dayjs';
   import { getDeptByName } from '@/api/system/dept';
   import { message } from 'ant-design-vue';
+  import { useUserStore } from '@/store/modules/user';
+  const userStore = useUserStore();
   type RangeVal = [Dayjs, Dayjs];
   const props = defineProps({
     pageProp: {
-      type: number,
+      type: Number,
       default: 0,
     },
     title: {
-      type: string,
+      type: String,
       default: '',
     },
     showDatePick: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showType: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showDept: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showDiagnosis: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showPeriod: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showOpera: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showDoctor: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showOrder: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showNum: {
-      type: number,
+      type: Number,
       default: 0,
     },
     showSelfDept: {
-      type: number,
+      type: Number,
+      default: 0,
+    },
+    showSumType: {
+      type: Number,
       default: 0,
     },
     selfDeptOptions: {
-      type: array,
+      type: Array<API.deptDataType>,
       default: [],
     },
   });
 
-  // 保存用户选择的所有条件
-  interface state {
-    deptName: string | number;
-    pickDate: Array<String>;
-    typeName: string | number;
-    diagnosisName: string | number;
-    periodName: string | number;
-    operaName: string | number;
-    doctorName: string | number;
-    orderName: string | number;
-    numName: string | number;
-    selfDeptName: string[];
-  }
-
-  const form = reactive<state>({
-    deptName: '科室名称',
+  const form = reactive<QUERY.formState>({
+    deptName: userStore.userInfo.HISDeptId,
     pickDate: [],
     typeName: 1,
     diagnosisName: '',
@@ -184,9 +184,10 @@
     orderName: '',
     numName: '',
     selfDeptName: [],
+    sumTypeName: 1
   });
 
-  const submitForm = reactive<state>({
+  const submitForm = reactive<QUERY.formState>({
     deptName: form.deptName,
     pickDate: form.pickDate,
     typeName: form.typeName,
@@ -197,6 +198,7 @@
     orderName: form.orderName,
     numName: form.numName,
     selfDeptName: form.selfDeptName,
+    sumTypeName: form.sumTypeName,
   });
 
   // 所有的options
@@ -207,13 +209,17 @@
       { value: 2, label: '住院' },
       { value: 3, label: '全院' },
     ],
-    deptOptions: <deptType[]>[],
+    deptOptions: <deptType>[],
     periodOptions: [
       { value: 1, label: '按天汇总' },
       { value: 2, label: '按月汇总' },
       { value: 3, label: '按年汇总' },
       { value: 4, label: '全部汇总' },
     ],
+    sumOptions: [
+      {value: 1, label: '分科室汇总'},
+      {value: 2, label: '所有科室汇总'},
+    ]
   });
 
   const emit = defineEmits(['query']);
@@ -264,10 +270,23 @@
     const date2 = val[1].format('YYYY-MM-DD');
     submitForm.pickDate = [date1, date2];
   };
+  // 科室自助：选择科室时触发
+  const selfDeptChange = (val: string) => {
+    submitForm.selfDeptName = val;
+    // submitForm.selfDeptName.push(val);
+  };
+  // 选择汇总类别触发
+  const sumTypeChange = (val: number) => {
+    submitForm.sumTypeName = val;
+  }
 
   const query = () => {
     if (!submitForm.pickDate.length) {
       message.warning('请选择时间');
+      return;
+    }
+    if (props.pageProp && submitForm.selfDeptName.length <= 0) {
+      message.warning('请选择科室');
       return;
     }
     emit('query', submitForm);

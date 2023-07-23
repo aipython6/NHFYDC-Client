@@ -49,6 +49,7 @@ declare namespace API {
     departmentName: string;
     HISDeptId: string;
     deptData: deptDataType[];
+    HISDeptParent: deptDataType;
   };
   type deptDataType = {
     value: string;

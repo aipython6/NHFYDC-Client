@@ -35,6 +35,8 @@
   interface propState {
     pageProp: number;
     showDatePick: number;
+    showPeriod: number;
+    showSumType: number;
   }
   const props = reactive<propState>({
     pageProp: 1,
@@ -45,11 +47,9 @@
   const dataList = ref([]);
   const downloadDataList = ref([]);
   const query = async (params: QUERY.formState) => {
-    // console.log(params);
     const data = await selfDeptBasic(params);
     dataList.value = data.dataList;
     downloadDataList.value = data.downloadDataList;
-    console.log(dataList.value);
   };
 
   onMounted(() => {

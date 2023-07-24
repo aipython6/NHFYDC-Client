@@ -16,6 +16,9 @@
         </template>
       </a-result>
     </div>
+    <div class="flex justify-center justify-items-center pt-16" v-show="props.loading">
+      <a-spin size="large" />
+    </div>
     <div v-if="props.dataList.length > 0">
       <div class="text-blue-500 font-bold">来源:{{ props.from }}</div>
       <div v-for="(item, index) of props.dataList.slice(0, 3)" :key="index" class="grid grid-cols-4 gap-2 md:grid-cols-7">
@@ -52,6 +55,10 @@ const props = defineProps({
   isClick: {
     type: Number,
     default: 0,
+  },
+  loading: {
+    type: Number,
+    defalut: 0
   }
 });
 // const tableData = props.downloadDataList;

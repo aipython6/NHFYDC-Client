@@ -21,14 +21,29 @@
                 >
               </div>
             </template>
+            <template #textTip>
+              <div class="text-green-500 text-md font-bold"
+                >(该查询根据所选择的科室返回门诊和住院数据)</div
+              >
+            </template>
           </CommonPage>
+          <!-- 门诊数据 -->
           <showData
-            class="pt-4"
+            class="pt-4 yb-4"
             :from="fromOutpatient"
             :is-click="isClick"
-            :loading="loading"
+            :loading="Outpatientloading"
             :data-List="OutpatientDataList"
             :download-data-list="downloadOutpatientDataList"
+          />
+          <!-- 住院数据 -->
+          <showData
+            class="pt-4"
+            :from="fromInpatient"
+            :is-click="isClick"
+            :loading="Inpatientloading"
+            :data-List="InpatientDataList"
+            :download-data-list="downloadInpatientDataList"
           />
         </div>
       </a-tab-pane>
@@ -49,10 +64,9 @@
 
   const tabs = ref([
     { id: 1, name: '基础数据' },
-    { id: 2, name: '病案数据' },
+    { id: 2, name: '常用指标' },
     { id: 3, name: '医嘱数据' },
-    { id: 4, name: '收费项目数据' },
-    { id: 5, name: '其他' },
+    { id: 4, name: '收费项目' },
   ]);
   interface propState {
     pageProp: number;
@@ -72,9 +86,11 @@
   const downloadOutpatientDataList = ref([]);
   // 标记是否已经点击查询按钮
   const isClick = ref(0);
-  const loading = ref(0);
+  const Outpatientloading = ref(0);
+  const Inpatientloading = ref(0);
   const query = async (params: QUERY.formState) => {
-    loading.value = 1;
+    Inpatientloading.value = 1;
+    Outpatientloading.value = 1;
     await selfDeptBasic(params).then((data) => {
       InpatientDataList.value = data.InpatientDataList;
       downloadInpatientDataList.value = data.downloadInpatientDataList;
@@ -82,9 +98,9 @@
       OutpatientDataList.value = data.OutpatientDataList;
       downloadOutpatientDataList.value = data.downloadOutpatientDataList;
       fromOutpatient.value = data.fromOutpatient;
-      console.log(data.OutpatientDataList);
       setTimeout(() => {
-        loading.value = 0;
+        Outpatientloading.value = 0;
+        Inpatientloading.value = 0;
         isClick.value = 1;
       }, 1000);
     });

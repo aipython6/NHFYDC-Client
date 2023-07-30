@@ -13,3 +13,16 @@ export function selfDeptBasic(data: QUERY.formState) {
     },
   );
 }
+
+export function CenterAllData(data: QUERY.centerState) {
+  return request(
+    {
+      url: Api.center,
+      method: 'post',
+      data,
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
+}

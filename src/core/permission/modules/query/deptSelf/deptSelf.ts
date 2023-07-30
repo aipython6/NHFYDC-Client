@@ -1,5 +1,6 @@
 export const deptSelfQuery = {
   basic: '/query/deptSelf/basic',
+  center: '/query/deptSelf/center',
 } as const;
 
 export const values = Object.values(deptSelfQuery);

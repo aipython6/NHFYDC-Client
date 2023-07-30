@@ -12,5 +12,12 @@ declare namespace QUERY {
     numName: String | Number;
     selfDeptName: String[];
     sumTypeName: String | Number;
+    HISParentId: String | Number;
+  };
+  // 用于保存点击最上级科室的参数
+  type centerState = {
+    pickDate: Array<String>;
+    sumTypeName: String | Number;
+    HISParentId: String | Number;
   };
 }

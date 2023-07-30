@@ -39,6 +39,7 @@ declare namespace API {
     parentId: number;
     HISdeptID: string;
     orderNum: number;
+    category: number;
   };
 
   /** 管理员部门转移 */
@@ -71,6 +72,7 @@ declare namespace API {
     id?: number;
     name: string;
     HISdeptID: string;
+    category: number;
   };
 
   type deptNameList = deptNameResult[];

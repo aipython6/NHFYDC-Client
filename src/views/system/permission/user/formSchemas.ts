@@ -24,6 +24,19 @@ export const deptSchemas: FormSchema<API.CreateDeptParams>[] = [
     rules: [{ required: true, type: 'string' }],
   },
   {
+    field: 'category',
+    component: 'Select',
+    label: '科室类别',
+    rules: [{ required: true, type: 'number' }],
+    componentProps: {
+      options: [
+        { label: '门诊', value: 1 },
+        { label: '住院', value: 2 },
+        { label: '非临床', value: 3 },
+      ],
+    },
+  },
+  {
     field: 'orderNum',
     component: 'InputNumber',
     label: '排序号',

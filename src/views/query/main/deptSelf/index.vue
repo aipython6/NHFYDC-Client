@@ -14,7 +14,7 @@
               </div>
             </template>
             <template #textTip>
-              <span class="text-green-500 text-md font-bold">(该查询根据所选择的科室返回门诊和住院数据)</span>
+              <span class="text-green-500 text-md font-bold">(该查询根据所选择的科室返回门诊和住院数据,若要查询整个中心的数据,则不需要选择科室)</span>
             </template>
           </CommonPage>
           <!-- 门诊数据 -->

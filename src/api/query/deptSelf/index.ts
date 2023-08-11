@@ -26,3 +26,16 @@ export function CenterAllData(data: QUERY.centerState) {
     },
   );
 }
+
+// 获取全院汇总数据
+export function getAllDataSum() {
+  return request(
+    {
+      url: Api.allDataSum,
+      method: 'post',
+    },
+    {
+      isGetDataDirectly: true,
+    },
+  );
+}

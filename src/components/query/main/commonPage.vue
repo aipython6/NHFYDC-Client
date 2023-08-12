@@ -39,7 +39,7 @@
         <a-select
           v-show="props.pageProp"
           v-model:value="form.selfDeptName"
-          placeholder="请选择室名称"
+          placeholder="请选择科室"
           style="width: 100%"
           mode="multiple"
           :allow-clear="true"
@@ -273,10 +273,12 @@
     const date1 = val[0].format('YYYY-MM-DD');
     const date2 = val[1].format('YYYY-MM-DD');
     submitForm.pickDate = [date1, date2];
+    emit('datePickChange', submitForm.pickDate);
   };
   // 科室自助：选择科室时触发
   const selfDeptChange = (val: []) => {
     submitForm.selfDeptName = val;
+    emit('selfDeptChange', submitForm.selfDeptName);
   };
   // 选择汇总类别触发
   const sumTypeChange = (val: number) => {

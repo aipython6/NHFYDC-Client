@@ -27,12 +27,17 @@ export function CenterAllData(data: QUERY.centerState) {
   );
 }
 
+type pickDateType = {
+  pickDate: Array<String>;
+};
+
 // 获取全院汇总数据
-export function getAllDataSum() {
+export function getAllDataSum(data: pickDateType) {
   return request(
     {
       url: Api.allDataSum,
       method: 'post',
+      data,
     },
     {
       isGetDataDirectly: true,
